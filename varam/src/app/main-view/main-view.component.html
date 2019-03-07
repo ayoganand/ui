@@ -1,0 +1,75 @@
+<div class="">
+  <div class=" col-12">
+    <div class="col-2 offset-10">
+      <button class="btn btn-info p-1 my-2" id="modalButton" data-toggle="modal" data-target="#addModal">Add student</button>
+    </div>
+    <div class="col-12">
+      <table datatable [dtOptions]="tableOptions" class="table row-border hover table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center" *ngFor="let headerSubscript of newData.headerContent;">{{ headerSubscript.label }}
+            </th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bodySubscript of newData.bodyContent;let i=index" class="pointer bg-white">
+            <td class="text-center" *ngFor="let headerSubscript of newData.headerContent; let j=index;">
+              <span (click)="goToDetails(bodySubscript)">{{ bodySubscript[headerSubscript.key]}}</span>
+            </td>
+            <td class="text-center">
+              <div style="cursor:pointer" (click)="openPopUp(bodySubscript)">Edit</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Student Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="ID">ID</label>
+          <input type="text" class="form-control" placeholder="Enter ID" [(ngModel)]="addData.id">
+        </div>
+        <div class="form-group">
+          <label for="ID">Name</label>
+          <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]="addData.name">
+        </div>
+        <div class="form-group">
+          <label for="ID">Class</label>
+          <input type="text" class="form-control" placeholder="Enter Class" [(ngModel)]="addData.class">
+        </div>
+        <div class="form-group">
+          <label for="M1">M1</label>
+          <input type="text" class="form-control" placeholder="Enter M1" [(ngModel)]="addData.m1">
+        </div>
+        <div class="form-group">
+          <label for="M2">M2</label>
+          <input type="text" class="form-control" placeholder="Enter M2" [(ngModel)]="addData.m2">
+        </div>
+        <div class="form-group">
+            <label for="M2">Total</label>
+           <span class="font-weight-bold">{{getTotal()}}</span>
+          </div>
+          <div class="form-group">
+              <label for="Result">Result</label>
+              <span class="font-weight-bold">{{getResult()}}</span> 
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeButton" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addStudent()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
